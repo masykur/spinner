@@ -27,9 +27,12 @@
     document.querySelector(".info").textContent = items.join(" ");
   
     const doors = document.querySelectorAll(".door");
-    document.querySelector("#spinner").addEventListener("click", spin);
+    document.querySelector("#spinner").addEventListener("click", () => {init(); spin();});
     document.querySelector("#reseter").addEventListener("click", init);
   
+    document.querySelector("#nav > ul > li > a:first-child").addEventListener("click", () => {
+      document.querySelector(".page").classList.remove('page-active');
+    });
     async function spin() {
       const idx = Math.floor(Math.random() * (employees.length));
       console.info(employees[idx]);
@@ -41,28 +44,11 @@
         await new Promise((resolve) => setTimeout(resolve, duration * 800));
       }
       const nameBox = document.querySelector("#name");
-      nameBox.textContent = employees[idx].name;
+      nameBox.textContent = employees[idx].name + ", " + employees[idx].note;
       nameBox.style.transform = "translateX(10)";
     }
   
-    const employees = [
-        {id: "11100518", name:"AM"},
-        {id: "09999564", name:"AGUS HERMANA"},
-        {id: "20020002", name:"ALIF RONI PRIAMBUDI"},
-        {id: "22090009", name:"FILDZAH FESTY SHARFINA ADANI"},
-        {id: "17070014", name:"DWI JAYANTI PURWANTINI"},
-        {id: "19120005", name:"RIZKI MAIDA OCTAVIANI SIMARMATA"},
-        {id: "23100006", name:"SULTAN DAFFA NUSANTARA"},
-        {id: "22120006", name:"MUHAMMAD RIDHWAN HABIB ABDILLAH"},
-        {id: "23100003", name:"MUHAMMAD ARDHANA GUSTI SYAHPUTRA"},
-        {id: "09696105", name:"CEPI SOPIAN NURJAMAN"},
-        {id: "16100016", name:"FAJRUL GHALEB"},
-        {id: "09898027", name:"HERMAWATI HADIWARDANI"},
-        {id: "21090013", name:"SHIRASAWA NOBUYASU"},
-        {id: "10704882", name:"THEODOR TIRTOHADI ROOSNO"},
-        {id: "10000159", name:"SAWITRI KUMALA DEWI	"},
-        {id: "09595442", name:"SETIO KOESOEMO"},
-        ];
+    let employees = [];
     function init(firstInit = true, groups = 1, duration = 1, selected) {
       document.querySelector("#name").textContent = "";
       let ptr = 0;
@@ -135,6 +121,38 @@
       return arr;
     }
   
+    function getAllParticipants(db) {
+      const txn = db.transaction('participants', "readonly");
+      const objectStore = txn.objectStore('participants');
+      let participants = [];
+      objectStore.openCursor().onsuccess = (event) => {
+        let cursor = event.target.result;
+          if (cursor) {
+              let participant = cursor.value;
+              participants.push(participant);
+              // continue next record
+              cursor.continue();
+          }
+      };
+      // close the database connection
+      txn.oncomplete = function () {
+          db.close();
+          employees = participants;
+      };
+    }
+
+    function loadData(){
+      const dbrequest = window.indexedDB.open("spinner");
+      dbrequest.onupgradeneeded = (event) => {
+        const db = event.target.result;
+        db.createObjectStore("participants", { keyPath: "id", autoIncrement: false, unique: true });
+      }
+      dbrequest.onsuccess = (event) => {
+        const db = event.target.result;
+        getAllParticipants(db);
+      }
+    }
+    loadData();
     init();
   })();
   
