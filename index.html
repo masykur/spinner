@@ -11,7 +11,9 @@
       
 </head>
 <body>
-  <div id="app">
+  <div id="app" class="page">
+    <div class="slideshow-container">
+    </div>
     <div class="winner">
         <div class="text" id="name"></div>
     </div>
@@ -68,32 +70,19 @@
     <div class="buttons">
       <button id="spinner">Spin</button>
       <button id="reseter">Reset</button>
+      <button id="accepter">Accept</button>
     </div>
   
     <p class="info"></p>
   </div>
-  <div id="burger">
-    <div class="line"></div>
-    <div class="line"></div>
-    <div class="line"></div>
-  </div>
-  <div id="nav">
+  <nav>
     <ul>
-      <li>
-        <a href="#">Spinner</a>
-      </li>
-      <li>
-        <a href="#" id="participants-menu">Participants</a>
-      </li>
-      <li>
-        <a href="#">Door Prize</a>
-      </li>
-      <li>
-        <a href="#">Winners</a>
-      </li>
-    </ul> 
-  </div>
+    </ul>
+  </nav>
+  <script src="https://cdn.jsdelivr.net/npm/idb@8/build/umd.js"></script>
   <script src="spinner.js"></script>
   <script src="participants.js"></script>
+  <script src="doorprize.js"></script>
+  <script src="winners.js"></script>
 </body>
 </html>
