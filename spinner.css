@@ -94,86 +94,16 @@ button {
     /* transform: translateY(0); */
     transition: transform 5s ease-in-out;
 }
-
-#burger {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background: #17141d;
-  padding: 1rem;
-  z-index: 1000;
-  cursor: pointer;
-  transition: 0.3s linear;
-  box-shadow: 2px 2px 5px #17141d;
+.hidden {
+  display: none;
 }
-
-#burger:hover {
-  background-color: goldenrod;
-}
-
-.line {
-  width: 22px;
-  margin-bottom: 5px;
-  height: 2px;
-  background-color: white;
-}
-
-.line:last-child {
-  margin-bottom: 0;
-}
-
-#nav {
-  height: 100vh;
-  width: 300px;
-  display: flex;
-  background-color: #17141d;
-  color: white;
-  position: fixed;
-  right: 0;
-  top: 0;
-  transform: translateX(100%);
-  transition: transform 0.3s linear;
-  margin-left: 20px;
-  padding-top: 60px;
-}
-
-#nav.active {
-  transform: translateX(0);
-}
-
-#nav ul {
-  list-style: none;
-  width: 100%;
-  padding-left: 0;
-}
-
-#nav ul li {
-  font-size: 1rem;
-  font-family: Arial, Helvetica, sans-serif;
-  letter-spacing: 3px;
-  line-height: 1.6;
-  width: 100%;
-  border-bottom: #7d7d7d 1px solid;
-}
-#nav ul li a {
-  text-decoration: none;
-  color: #fff;
-  width: 100%;
-  display: block;
-  padding: 12px;
-  transition: all 0.5s ease-out;
-}
-#nav ul li a:hover {
-  background-color: #fff;
-  color: #333;
-}
-
 .page {
   display: none;
   position: absolute;
-  top: 0;
+  top: 70px;
   width: 100%;
   height: 100vh;
+  padding: 8px;
   background-color: rgb(255, 255, 255);
 }
 .page-active {
@@ -195,3 +125,92 @@ button {
   background: #37005a;
   color: rgb(252, 251, 251);
 }
+
+nav{
+  width: 100%;
+  height: 70px;
+  background-color: #0022ffd2;
+  line-height: 50px;
+  position: absolute;
+  top: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+nav ul{
+  /* float: right; */
+  margin-right: 30px;
+  display: flex;
+  justify-content: space-around;
+}
+nav ul li{
+  list-style-type: none;
+  display: inline-block;
+  transition: 0.7s all;
+}
+nav ul li:hover{
+  background-color:#088;
+}
+nav ul li a{
+  text-decoration: none;
+  color: #fff;
+  padding: 20px;
+}
+nav ul li a.active{
+  border-bottom: 4px solid #088;
+}
+
+
+/* Slideshow container */
+.slideshow-container {
+  position: absolute;
+  top: 0px;
+  background: #ffffffef;
+  font-family: Arial, Helvetica, sans-serif;
+  width: 100%;
+}
+
+/* Slides */
+.slide {
+  display: none;
+  padding: 0px;
+  text-align: center;
+  font-size: 48px;
+}
+
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: -30px;
+  padding: 16px;
+  color: #888;
+  font-weight: bold;
+  font-size: 20px;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  position: absolute;
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+  color: white;
+}
+
+/* Add a background color to the active dot/circle */
+.active, .dot:hover {
+  background-color: #717171;
+}
+
+/* Add an italic font style to all quotes */
+q {font-style: italic;}
+
+/* Add a blue color to the author */
+.author {color: cornflowerblue;}
