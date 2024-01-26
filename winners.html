@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Spinner</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="spinner.css">
+</head>
+<body>
+  <div id="winners" class="page">
+    <h2>Winners</h2>
+    <div>
+      <table style="width: 100%" class="table">
+        <thead>
+          <tr>
+            <th>ID</th><th>Name</th><th>Note</th>
+          </tr>
+          <tbody></tbody>
+          <tfoot></tfoot>
+        </thead>
+      </table>
+    </div>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="participants.html">Participants</a></li>
+      <li><a href="doorprizes.html">Doorprizes</a></li>
+      <li><a href="#" class="active">Winners</a></li>
+    </ul>
+  </nav>
+  <script src="https://cdn.jsdelivr.net/npm/idb@8/build/umd.js"></script>
+  <script src="main.js"></script>
+  <script src="winners.js"></script>
+</body>
+</html>

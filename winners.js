@@ -1,7 +1,6 @@
-(function () {
-  function render(el, doorprizes){
-    let tableBody = el.querySelector("table tbody");
-    let tableFoot = el.querySelector("table tfoot");
+(async function () {
+  function render(doorprizes){
+    let tableBody = document.querySelector("table tbody");
     tableBody.innerHTML = "";
     doorprizes.forEach(doorprize => {
       if (doorprize.winners && doorprize.winners.forEach) {
@@ -31,30 +30,38 @@
       }
     });
   }
-  let template = 
-  '<h2>Winners</h2>' +
-  '<div>' +
-  '<table style="width: 100%">' + 
-  '<thead><tr><th>ID</th><th>Name</th><th>Note</th></tr></thead>' +
-  '<tbody></tbody>' +
-  '<tfoot></tfoot>' +
-  '<table>' +
-  '</div>';
-  let el = document.createElement("div");
-  el.id ="winners";
-  el.classList.add("page");
-  el.innerHTML = template;
-  let app = document.querySelector("#app");
-  app.parentNode.insertBefore(el, app.nextSibling);
-  addToMenu(el, "Winners");
-  let db = null;
-  document.addEventListener("dbinitialized", async (event) => {
-    db = event.detail;
-    const data = await db.getAll("doorprizes")
-    render(el, data);
-  });
-  document.addEventListener("doorprizesUpdated", async (event) => {
-    const data = await db.getAll("doorprizes")
-    render(el, data);
-  });
+  // let template = 
+  // '<h2>Winners</h2>' +
+  // '<div>' +
+  // '<table style="width: 100%">' + 
+  // '<thead><tr><th>ID</th><th>Name</th><th>Note</th></tr></thead>' +
+  // '<tbody></tbody>' +
+  // '<tfoot></tfoot>' +
+  // '<table>' +
+  // '</div>';
+  // let el = document.createElement("div");
+  // el.id ="winners";
+  // el.classList.add("page");
+  // el.innerHTML = template;
+  // let app = document.querySelector("#app");
+  // app.parentNode.insertBefore(el, app.nextSibling);
+  // addToMenu(el, "Winners");
+  // let db = null;
+  // document.addEventListener("dbinitialized", async (event) => {
+  //   db = event.detail;
+  //   const data = await db.getAll("doorprizes")
+  //   render(el, data);
+  // });
+  // document.addEventListener("doorprizesUpdated", async (event) => {
+  //   const data = await db.getAll("doorprizes")
+  //   render(el, data);
+  // });
+
+  const db = await (() => {
+    return new Promise((resolve) => {
+      document.addEventListener("dbinitialized", (event) => resolve(event.detail));
+    })
+  })();
+  const data = await db.getAll("doorprizes")
+  render(data);
 })();
